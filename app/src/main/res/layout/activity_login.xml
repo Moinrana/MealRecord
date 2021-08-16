@@ -1,25 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.wear.widget.BoxInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_grey"
-    android:padding="@dimen/box_inset_layout_padding"
-    tools:context=".LoginActivity"
-    tools:deviceIds="wear">
+    android:background="@drawable/login_bg"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".LoginActivity">
 
-    <FrameLayout
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/inner_frame_layout_padding"
-        app:boxedEdges="all">
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Meal Record"
+        android:textColor="@color/white"
+        android:textSize="32sp" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="Enter your Email"
+        android:layout_marginBottom="16dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:text="Sign In"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
 
         <TextView
-            android:id="@+id/text"
+            android:id="@+id/tvDontHaveAcc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/hello_world" />
+            android:text="don't have an account?"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="14sp" />
 
-    </FrameLayout>
-</androidx.wear.widget.BoxInsetLayout>
+        <Button
+            android:id="@+id/btnSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:text="Sign Up!"
+            android:textAllCaps="false" />
+    </LinearLayout>
+    <Button
+        android:id="@+id/btnFrPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#000000"
+        android:text="Forget Password?"
+        android:textAllCaps="false"
+        />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/loginpage2" />
+</LinearLayout>

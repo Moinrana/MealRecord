@@ -11,10 +11,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class AdapterClass extends RecyclerView.Adapter<AdapterClass.ViewHolder> {
-    public List<TestClass> testLists;
+    public List<Weeklydata> weeklydata;
+    private User user;
 
-    public AdapterClass(List<TestClass> testlists) {
-        testLists = testlists;
+    public AdapterClass(List<Weeklydata> testlists) {
+        weeklydata = testlists;
+    }
+
+    public void setWeeklydata(List<Weeklydata> testlists){
+        weeklydata = testlists;
     }
 
     @NonNull
@@ -26,16 +31,20 @@ public class AdapterClass extends RecyclerView.Adapter<AdapterClass.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull AdapterClass.ViewHolder holder, int position) {
-        String username = testLists.get(position).getName();
-        String status = testLists.get(position).getStatus();
-        String address = testLists.get(position).getAddress();
+//        String username = weeklydata.get(position).get();
+//        String status = weeklydata.get(position).getStatus();
+//        String address = weeklydata.get(position).getAddress();
 
-        holder.setData(username, status, address);
+        int totalMeal = weeklydata.get(position).getTotalMeal();
+        int totalPrice = weeklydata.get(position).getTotalPrice();
+        List<User> user = weeklydata.get(position).getUser();
+
+        holder.setData(totalPrice, totalMeal, user.get(0));
     }
 
     @Override
     public int getItemCount() {
-        return testLists.size();
+        return weeklydata.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -50,10 +59,10 @@ public class AdapterClass extends RecyclerView.Adapter<AdapterClass.ViewHolder> 
             tvAddress = itemView.findViewById(R.id.tvAddress);
         }
 
-        public void setData(String username, String status, String address) {
-            tvUserName.setText(username);
-            tvStatus.setText(status);
-            tvAddress.setText(address);
+        public void setData(int tp, int tm, User user) {
+            tvUserName.setText(user.getUname());
+            tvStatus.setText(tm);
+            tvAddress.setText(tp);
         }
     }
 }

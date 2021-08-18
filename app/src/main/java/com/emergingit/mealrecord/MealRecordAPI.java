@@ -4,6 +4,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 
 public interface MealRecordAPI {
     @GET("api/person")
@@ -12,7 +13,10 @@ public interface MealRecordAPI {
     @GET("meals/weekly")
     Call<Weekly> getWeeklyData();
 
+    @POST("meals/daily")
+    Call<List<Weeklydata>> getDailyMeals();
+
     @GET("users/all")
-    Call<List<User>> getUsers();
+    Call<UsersModel> getUsers();
 
 }

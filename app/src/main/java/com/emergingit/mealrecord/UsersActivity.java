@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -20,47 +19,35 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class WeeklyActivity extends AppCompatActivity {
-    LinearLayout weeklyContainer;
-    ProgressBar progressBar;
-    TextView tvTotalMeals, tvTotalAmount;
+public class UsersActivity extends AppCompatActivity {
     RecyclerView recyclerView;
-    AdapterClass adapter;
+    ProgressBar progressBar;
+    LinearLayout container;
     LinearLayoutManager layoutManager;
-    Weekly weekly;
+    AdapterClassUsers adapter;
+    UsersModel usersModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_weekly);
+        setContentView(R.layout.activity_users);
         init();
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        toggleProgress(true);
-    }
-
     private void init() {
-        tvTotalAmount = findViewById(R.id.tvTotalAmount);
-        tvTotalMeals = findViewById(R.id.tvTotalMeals);
-        progressBar = findViewById(R.id.prgBar);
-        weeklyContainer = findViewById(R.id.secondaryContainer);
-        putDataOnRecycleView();
-        getWeeklyMeals();
+        container = findViewById(R.id.layoutContainer);
+        progressBar = findViewById(R.id.prgBarUsers);
+        recyclerView = findViewById(R.id.recyclerUsers);
+        initializeRecycler();
+        getUsers();
     }
 
     private void toggleProgress(final boolean showProgress) {
-        weeklyContainer.setVisibility(showProgress ? View.GONE : View.VISIBLE);
+        container.setVisibility(showProgress ? View.GONE : View.VISIBLE);
         progressBar.setVisibility(showProgress ? View.VISIBLE : View.GONE);
     }
 
-    private void getWeeklyMeals() {
-        callTheAPI();
-    }
-
-    private void callTheAPI() {
+    private void getUsers() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://mealrecord.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -68,37 +55,35 @@ public class WeeklyActivity extends AppCompatActivity {
 
         MealRecordAPI mealRecordAPI = retrofit.create(MealRecordAPI.class);
 
-        Call<Weekly> call = mealRecordAPI.getWeeklyData();
-        call.enqueue(new Callback<Weekly>() {
+        Call<UsersModel> call = mealRecordAPI.getUsers();
+        call.enqueue(new Callback<UsersModel>() {
             @Override
-            public void onResponse(Call<Weekly> call, Response<Weekly> response) {
+            public void onResponse(Call<UsersModel> call, Response<UsersModel> response) {
                 toggleProgress(false);
                 if (!response.isSuccessful() || response.body() == null) {
-                    Toast.makeText(WeeklyActivity.this, "Something went wrong please try again", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UsersActivity.this, "Something went wrong please try again", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                weekly = response.body();
-                adapter.setWeeklydata(weekly.getWeeklyData());
+                usersModel = response.body();
+                adapter.setUsersList(usersModel.getUsers());
                 adapter.notifyDataSetChanged();
-                tvTotalAmount.setText("Total Amount: " + String.valueOf(weekly.getSumOfWeek().getTotalAmount()));
-                tvTotalMeals.setText("Total Meals: " + String.valueOf(weekly.getSumOfWeek().getTotalMealCount()));
             }
 
             @Override
-            public void onFailure(Call<Weekly> call, Throwable t) {
+            public void onFailure(Call<UsersModel> call, Throwable t) {
                 toggleProgress(false);
-                Toast.makeText(WeeklyActivity.this, "Error:" + t, Toast.LENGTH_SHORT).show();
+                Toast.makeText(UsersActivity.this, "Error:" + t, Toast.LENGTH_SHORT).show();
             }
 
         });
     }
 
-    private void putDataOnRecycleView() {
+    private void initializeRecycler() {
         recyclerView = findViewById(R.id.reclmealViewes);
         layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new AdapterClass(new ArrayList<>());
+        adapter = new AdapterClassUsers(new ArrayList<>());
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }

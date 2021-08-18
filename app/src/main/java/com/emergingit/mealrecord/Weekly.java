@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 
 public class Weekly {
-    private List<Weeklydata> weeklydata;
+    private List<Weeklydata> weeklyData;
     private SumOfWeek sumOfWeek;
 }

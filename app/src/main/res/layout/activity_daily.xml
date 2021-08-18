@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dailyContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".WeeklyActivity"
+    android:background="@drawable/dailymeals">
+
+    <ProgressBar
+        android:id="@+id/prgBarDaily"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/purple_700"
+        android:indeterminateTintMode="src_atop"
+        android:visibility="gone"
+        />
+
+    <LinearLayout
+        android:id="@+id/maincontainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Daily Meals"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerMeals"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
+
+            <TextView
+                android:id="@+id/tvTotalMealsDaily"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total Meals:"
+                android:textColor="@color/white"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/tvTotalAmountDaily"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="Total Amount:"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1.5">
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_add"
+            app:fabSize="mini"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="24dp"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/ic_add" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_user"
+            app:fabSize="mini"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="60dp"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/ic_user" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_item"
+            app:fabSize="mini"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="120dp"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/ic_shopping" />
+
+
+    </FrameLayout>
+</LinearLayout>

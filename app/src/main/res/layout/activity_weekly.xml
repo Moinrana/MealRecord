@@ -1,23 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/weeklyContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WeeklyActivity">
+    android:orientation="vertical"
+    tools:context=".WeeklyActivity"
+    android:background="@drawable/weeklymeals4">
 
-    <RelativeLayout
+    <ProgressBar
+        android:id="@+id/prgBar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/purple_700"
+        android:indeterminateTintMode="src_atop"
+        android:visibility="gone"
+        />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/reclmealViewes"
+    <LinearLayout
+        android:id="@+id/secondaryContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#ffffff"
+            android:text="Weekly Meals"
+            android:textSize="18dp"
             />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    </RelativeLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/reclmealViewes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
+
+            <TextView
+                android:id="@+id/tvTotalMeals"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total Meals:"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/tvTotalAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total Amount:"
+                android:textSize="16dp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

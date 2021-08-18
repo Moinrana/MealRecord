@@ -18,7 +18,7 @@ public class AdapterClass extends RecyclerView.Adapter<AdapterClass.ViewHolder> 
         weeklydata = testlists;
     }
 
-    public void setWeeklydata(List<Weeklydata> testlists){
+    public void setWeeklydata(List<Weeklydata> testlists) {
         weeklydata = testlists;
     }
 
@@ -44,6 +44,9 @@ public class AdapterClass extends RecyclerView.Adapter<AdapterClass.ViewHolder> 
 
     @Override
     public int getItemCount() {
+        if (weeklydata == null) {
+            return 0;
+        }
         return weeklydata.size();
     }
 
@@ -61,8 +64,8 @@ public class AdapterClass extends RecyclerView.Adapter<AdapterClass.ViewHolder> 
 
         public void setData(int tp, int tm, User user) {
             tvUserName.setText(user.getUname());
-            tvStatus.setText(tm);
-            tvAddress.setText(tp);
+            tvStatus.setText("Meal: " + String.valueOf(tm));
+            tvAddress.setText("Amount: " + String.valueOf(tp));
         }
     }
 }

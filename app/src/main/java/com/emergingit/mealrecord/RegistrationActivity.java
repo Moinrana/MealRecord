@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import retrofit2.Call;
@@ -16,6 +18,8 @@ public class RegistrationActivity extends AppCompatActivity {
     EditText etName, etEmail, etPass, etRepass;
     Button btnRegister;
     String username, email, password, repass;
+    LinearLayout container;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +29,8 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     private void init() {
+        container = findViewById(R.id.llHomecontainer);
+        progressBar = findViewById(R.id.prgBarReg);
         etName = findViewById(R.id.etUserName);
         etPass = findViewById(R.id.etConfirmPass);
         etRepass = findViewById(R.id.etReconfirmPass);
@@ -43,6 +49,11 @@ public class RegistrationActivity extends AppCompatActivity {
         });
     }
 
+    private void toggleProgress(final boolean showProgress) {
+        container.setVisibility(showProgress ? View.GONE : View.VISIBLE);
+        progressBar.setVisibility(showProgress ? View.VISIBLE : View.GONE);
+    }
+
     private void registerUser() {
         if (!validateFields()) {
             return;
@@ -52,6 +63,7 @@ public class RegistrationActivity extends AppCompatActivity {
             Toast.makeText(RegistrationActivity.this, "Password didn't match", Toast.LENGTH_SHORT).show();
             return;
         }
+        toggleProgress(true);
         User user = new User();
         user.setEmail(email);
         user.setUname(username);
@@ -60,6 +72,7 @@ public class RegistrationActivity extends AppCompatActivity {
         call.enqueue(new Callback<RegisteredUser>() {
             @Override
             public void onResponse(Call<RegisteredUser> call, Response<RegisteredUser> response) {
+                toggleProgress(false);
                 if (response.isSuccessful() == false || response.body() == null) {
                     Toast.makeText(RegistrationActivity.this, "Something went wrong. Please try again", Toast.LENGTH_SHORT).show();
                     return;
@@ -74,7 +87,8 @@ public class RegistrationActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<RegisteredUser> call, Throwable t) {
-
+                toggleProgress(false);
+                Toast.makeText(RegistrationActivity.this, "Something went wrong. Please try again", Toast.LENGTH_SHORT).show();
             }
         });
     }

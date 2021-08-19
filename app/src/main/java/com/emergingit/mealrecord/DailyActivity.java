@@ -123,6 +123,7 @@ public class DailyActivity extends AppCompatActivity {
     }
 
     private void addMeal(int mealCount) {
+        toggleProgress(true);
         Meal meal = new Meal();
         meal.setMealCount(mealCount);
         meal.setUserId(SharedPrefHelper.getIDFromSP(getApplicationContext()));
@@ -130,6 +131,7 @@ public class DailyActivity extends AppCompatActivity {
         call.enqueue(new Callback<Meal>() {
             @Override
             public void onResponse(Call<Meal> call, Response<Meal> response) {
+                toggleProgress(false);
                 if (!response.isSuccessful() && response.body() == null) {
                     Toast.makeText(DailyActivity.this, "Something went wrong please try again", Toast.LENGTH_SHORT).show();
                     return;
@@ -145,6 +147,7 @@ public class DailyActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Meal> call, Throwable t) {
+                toggleProgress(false);
                 Toast.makeText(DailyActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
             }

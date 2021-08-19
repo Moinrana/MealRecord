@@ -26,15 +26,26 @@
             android:textSize="25dp" />
 
         <TextView
+            android:id="@+id/tvUnameHome"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:layout_marginRight="25dp"
             android:layout_weight="1"
-            android:text="Moin"
+            android:text="DASH"
             android:textAlignment="textEnd"
             android:textColor="@color/white"
-            android:textSize="12dp" />
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/tvlogoutHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:layout_marginTop="60dp"
+            android:textColor="@color/white"
+            android:layout_marginRight="20dp"
+            />
     </LinearLayout>
 
     <LinearLayout

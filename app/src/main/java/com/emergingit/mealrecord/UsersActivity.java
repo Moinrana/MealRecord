@@ -34,6 +34,12 @@ public class UsersActivity extends AppCompatActivity {
         init();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        toggleProgress(true);
+    }
+
     private void init() {
         container = findViewById(R.id.layoutContainer);
         progressBar = findViewById(R.id.prgBarUsers);
@@ -48,38 +54,40 @@ public class UsersActivity extends AppCompatActivity {
     }
 
     private void getUsers() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://mealrecord.herokuapp.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl("https://mealrecord.herokuapp.com/")
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//
+//        MealRecordAPI mealRecordAPI = retrofit.create(MealRecordAPI.class);
 
-        MealRecordAPI mealRecordAPI = retrofit.create(MealRecordAPI.class);
-
-        Call<UsersModel> call = mealRecordAPI.getUsers();
-        call.enqueue(new Callback<UsersModel>() {
+        Call<List<User>> call = RetrofitHelper.getApiCaller().getUsers();
+        call.enqueue(new Callback<List<User>>() {
             @Override
-            public void onResponse(Call<UsersModel> call, Response<UsersModel> response) {
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 toggleProgress(false);
                 if (!response.isSuccessful() || response.body() == null) {
                     Toast.makeText(UsersActivity.this, "Something went wrong please try again", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                usersModel = response.body();
-                adapter.setUsersList(usersModel.getUsers());
+                List<User> users;
+                users = response.body();
+                adapter.setUsersList(users);
                 adapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onFailure(Call<UsersModel> call, Throwable t) {
+            public void onFailure(Call<List<User>> call, Throwable t) {
                 toggleProgress(false);
                 Toast.makeText(UsersActivity.this, "Error:" + t, Toast.LENGTH_SHORT).show();
+                t.printStackTrace();
             }
 
         });
     }
 
     private void initializeRecycler() {
-        recyclerView = findViewById(R.id.reclmealViewes);
+        recyclerView = findViewById(R.id.recyclerUsers);
         layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);

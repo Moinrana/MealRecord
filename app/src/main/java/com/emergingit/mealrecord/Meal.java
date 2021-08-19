@@ -1,5 +1,7 @@
 package com.emergingit.mealrecord;
 
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,9 +9,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class Meal {
+    private String mealId;
     private String userId;
-    private String uname;
-    private String email;
-    private String password;
+    private int mealCount;
+    private int price;
+    private Date date;
+    private int ds;
+    private boolean isAdded;
 }

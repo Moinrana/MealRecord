@@ -48,6 +48,7 @@ public class DailyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily);
         init();
+        getDailyMeals();
     }
 
 //    @Override
@@ -61,7 +62,6 @@ public class DailyActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        toggleProgress(true);
         getDailyMeals();
     }
 
@@ -161,6 +161,7 @@ public class DailyActivity extends AppCompatActivity {
     }
 
     private void getDailyMeals() {
+        toggleProgress(true);
         Call<List<Weeklydata>> call = RetrofitHelper.getApiCaller().getDailyMeals();
         call.enqueue(new Callback<List<Weeklydata>>() {
             @Override

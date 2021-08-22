@@ -80,8 +80,8 @@ public class WeeklyActivity extends AppCompatActivity {
                 weekly = response.body();
                 adapter.setWeeklydata(weekly.getWeeklyData());
                 adapter.notifyDataSetChanged();
-                tvTotalAmount.setText("Total Amount: " + String.valueOf(weekly.getSumOfWeek().getTotalAmount()));
-                tvTotalMeals.setText("Total Meals: " + String.valueOf(weekly.getSumOfWeek().getTotalMealCount()));
+                tvTotalAmount.setText("Total Amount: " + ((weekly.getSumOfWeek() != null) ? String.valueOf(weekly.getSumOfWeek().getTotalAmount()) : '0'));
+                tvTotalMeals.setText("Total Meals: " + ((weekly.getSumOfWeek() != null) ? String.valueOf(weekly.getSumOfWeek().getTotalMealCount()) : '0'));
             }
 
             @Override
@@ -89,7 +89,6 @@ public class WeeklyActivity extends AppCompatActivity {
                 toggleProgress(false);
                 Toast.makeText(WeeklyActivity.this, "Error:" + t, Toast.LENGTH_SHORT).show();
             }
-
         });
     }
 

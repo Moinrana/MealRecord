@@ -4,9 +4,9 @@
     android:id="@+id/weeklyContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/weeklymeals4"
     android:orientation="vertical"
-    tools:context=".WeeklyActivity"
-    android:background="@drawable/weeklymeals4">
+    tools:context=".WeeklyActivity">
 
     <ProgressBar
         android:id="@+id/prgBar"
@@ -17,8 +17,7 @@
         android:indeterminate="true"
         android:indeterminateTint="@color/purple_700"
         android:indeterminateTintMode="src_atop"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/secondaryContainer"
@@ -30,8 +29,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Weekly Meals"
-            android:textSize="18dp"
-            />
+            android:textColor="#000000"
+            android:textSize="18dp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -56,6 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Total Meals:"
+                android:textColor="#000000"
                 android:textSize="16dp" />
 
             <TextView
@@ -63,6 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Total Amount:"
+                android:textColor="#000000"
                 android:textSize="16dp" />
         </LinearLayout>
     </LinearLayout>

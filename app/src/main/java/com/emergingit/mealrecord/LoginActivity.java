@@ -32,12 +32,16 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        init();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         if (SharedPrefHelper.getIDFromSP(getApplicationContext()) != "") {
-            Intent activity = new Intent(LoginActivity.this, HomeActivity.class);
-            startActivity(activity);
+            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
             return;
         }
-        init();
     }
 
     private void init() {
